@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+div#hue {
+  background: linear-gradient(
+    to bottom,
+    hsl(0, 100%, 50%),
+    hsl(60, 100%, 50%),
+    hsl(120, 100%, 50%),
+    hsl(180, 100%, 50%),
+    hsl(240, 100%, 50%),
+    hsl(300, 100%, 50%),
+    hsl(360, 100%, 50%)
+  );
+}
+div#saturation {
+  background: linear-gradient(
+    to bottom,
+    hsl(0, 100%, 50%),
+    hsl(0, 80%, 50%),
+    hsl(0, 60%, 50%),
+    hsl(0, 40%, 50%),
+    hsl(0, 20%, 50%),
+    hsl(0, 10%, 50%),
+    hsl(0, 0%, 50%)
+  );
+}
+div#bright {
+  background: linear-gradient(
+    to bottom,
+    hsl(0, 100%, 50%),
+    hsl(0, 100%, 40%),
+    hsl(0, 100%, 30%),
+    hsl(0, 100%, 20%),
+    hsl(0, 100%, 10%),
+    hsl(0, 100%, 0%)
+  );
+}
