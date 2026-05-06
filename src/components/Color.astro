@@ -2,19 +2,87 @@
 
 ---
 <script>
+  document.addEventListener('astro:page-load',(e)=>{
+    console.log('Page loaded')
+  })
+  const circleControl = document.getElementsByClassName('circle-control')
+  let isDragging = false
+  for(let circle of circleControl){
+    // circle.addEventListener('mousedown',e=>{
+    //   if(e.target instanceof HTMLElement){
+    //     e.target.classList.add('cursor-grabbing')
+    //     e.target.classList.remove('cursor-grab')
+    //   }
+    // })
+    
+    circle.addEventListener('mouseup',e=>{
+      // isDragging = false
+      if(e.target instanceof HTMLElement){
+        e.target.classList.add('cursor-grab')
+        e.target.classList.remove('cursor-grabbing')
+      }
+    })
+    circle.addEventListener('mousedown',e=>{
+      // isDragging = true
+      if(e.target instanceof HTMLElement){
+        e.target.classList.add('cursor-grabbing')
+        e.target.classList.remove('cursor-grab')
+      }
+    })
+    circle.parentElement.addEventListener('mouseup',e=>{
+      isDragging = false
+    })
+    circle.parentElement.addEventListener('mousedown',e=>{
+      isDragging = true
+    })
+    circle.parentElement.addEventListener('mousemove',e=>{
+      // console.log('Dentro del mousemove')
+      if (!isDragging) return
+      
+      const x = e.offsetX
+      const y = e.offsetY
+      console.log('Posición del mouse: ',x,y)
+      if(e.target instanceof HTMLElement){
+        // const circleRect = circle.getBoundingClientRect()
+        // console.log('Posición del círculo: ',circleRect.x,circleRect.y)
+        // let p = 122.5 + y
+        // console.log('Valor de p: ',p)
+        circle.style.transform = `translateY(${y}px)`
+      }
+    })
+    // circle.addEventListener('click',e=>{
+    //   console.log('Dentro del click')
+    //   // if(e.target instanceof HTMLElement){
+    //   // }
+    // })
+
+    // function test(fn){
+    //   let contador = 0
+    //   return function(...args){
+    //     console.log('Valor del contador: ',contador)
+    //     fn(...args)
+    //     contador++
+    //   }
+    // }
+    // const handler = test(e=>{
+    //   console.log('Dentro del click')
+    // })
+    // circle.addEventListener('click',handler)
+
+  }
 
 </script>
 <div class="text-2xl h-full grid items-center">
   <div class="w-3/12 h-[400px] rounded-2xl mx-auto grid grid-cols-[repeat(3,50px)_1fr] shadow-2xl overflow-hidden">
     <div id="hue" class="relative flex justify-center">
-      <div class="w-5 aspect-square rounded-full bg-white shadow-2xl absolute cursor-grab"></div>
+      <div id="circle-hue" class="circle-control w-5 aspect-square rounded-full bg-white shadow-2xl absolute cursor-grab pointer-events-none"></div>
     </div>
     <div id="saturation" class="relative flex justify-center">
-      <div class="w-5 aspect-square rounded-full bg-white shadow-2xl absolute cursor-grab"></div>
+      <div id="circle-saturation" class="circle-control w-5 aspect-square rounded-full bg-white shadow-2xl absolute cursor-grab pointer-events-none" draggable="true"></div>
     </div>
     <div id="bright" class="relative flex justify-center">
-      <div class="w-5 aspect-square rounded-full bg-white shadow-2xl absolute cursor-grab"></div>
+      <div id="circle-bright" class="circle-control w-5 aspect-square rounded-full bg-white shadow-2xl absolute cursor-grab pointer-events-none" draggable="true"></div>
     </div>
-    <div class="bg-orange-300">otro</div>
+    <div id="pepe" class="bg-orange-300">otro</div>
   </div>
 </div>
